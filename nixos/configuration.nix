@@ -17,6 +17,11 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -75,11 +80,15 @@
   environment.systemPackages = with pkgs; [
   home-manager
    git
+   hyprpanel
   ];
 
 	# Hyprland
 	programs.hyprland.enable = true;
 
+
+programs.fish.enable = true;
+users.users.headset.shell = pkgs.fish;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
