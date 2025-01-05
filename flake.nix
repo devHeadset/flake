@@ -1,5 +1,5 @@
 {
-  description = "Headset's System flake";
+  description = "headset's sys flake :3";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -21,7 +21,7 @@
 
         modules = [
           ./nixos/configuration.nix
-          { nixpkgs.overlays = [ hyprpanel.overlay ]; }  # Use hyprpanel directly here
+          { nixpkgs.overlays = [ hyprpanel.overlay ]; } 
         ];
       };
     };

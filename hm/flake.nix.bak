@@ -24,12 +24,13 @@
     };
 
     nixcord = {
-      url = "github:kaylorben/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    url = "github:kaylorben/nixcord";
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin, stylix, spicetify-nix, nixcord, ... }:
+
+  };
+
+  outputs = { nixpkgs, home-manager, catppuccin, stylix, spicetify-nix, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -39,16 +40,15 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-  modules = [
-    ./home.nix
-    stylix.homeManagerModules.stylix
-    catppuccin.homeManagerModules.catppuccin
-    spicetify-nix.homeManagerModules.default
-    nixcord.homeManagerModules.nixcord  # Adjusted attribute
-  ];
-
-
-        # Optionally use extraSpecialArgs to pass through arguments to home.nix.
+        modules = [
+          ./home.nix
+          stylix.homeManagerModules.stylix
+          catppuccin.homeManagerModules.catppuccin
+          spicetify-nix.homeManagerModules.default
+          inputs.nixcord.homeManagerModules.nixcord
+        ];
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
       };
     };
 }

@@ -17,6 +17,10 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Mullvad VPN
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  
+
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
@@ -81,10 +85,17 @@
   home-manager
    git
    hyprpanel
+   mpd
+   ncmpcpp
+   ghostty
+   idevicerestore
+   mpd-mpris
   ];
 
 	# Hyprland
 	programs.hyprland.enable = true;
+
+  services.mpd.enable = true; 
 
 
 programs.fish.enable = true;
