@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "headset";
-  home.homeDirectory = "/home/headset";
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+home.username = "headset";
+home.homeDirectory = "/home/headset";
+home.stateVersion = "24.05"; # Please read the comment before changing.
+
 
 catppuccin.enable = true;
 nixpkgs.config.allowUnfree = true;
@@ -16,18 +15,24 @@ catppuccin.cursors = {
 };
 
 
+
+catppuccin.btop.enable = true;
+
+
+
   programs.nixcord = {
-    enable = true;  # enable Nixcord. Also installs discord package
+    enable = true;  
     config = {
-      useQuickCss = true;   # use out quickCSS
-      themeLinks = [        # or use an online theme
+      useQuickCss = true;   
+      themeLinks = [        
         "https://raw.githubusercontent.com/catppuccin/discord/refs/heads/main/themes/mocha.theme.css"
       ];
-      frameless = true; # set some Vencord options
+      frameless = true; 
       plugins = {
         messageLogger.enable = true;
-        hideAttachments.enable = true;    # Enable a Vencord plugin
+        hideAttachments.enable = true;    
         silentTyping.enable = true;
+        fakeNitro.enable = true;
       };
     };
   };
@@ -35,8 +40,6 @@ catppuccin.cursors = {
 
 home.packages = [
     pkgs.tmux
-    pkgs.neovim 
-    pkgs.fish
     pkgs.firefox
     pkgs.eza
     pkgs.starship 
@@ -49,14 +52,15 @@ home.packages = [
     pkgs.prismlauncher
     pkgs.hyfetch
     pkgs.hyprshot
+    pkgs.xfce.thunar
     pkgs.flatpak
+    pkgs.gimp
+    pkgs.neofetch
 ];
 
 programs.obs-studio = {
   enable = true;
 };
-
-
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -66,7 +70,7 @@ programs.obs-studio = {
 # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
- 
+
   programs.git = {
     enable = true;
     userName = "devHeadset";
@@ -74,24 +78,32 @@ programs.obs-studio = {
   };
 
 
-  programs.rofi = {
-  enable = true;
   
-};
+
+    programs.rofi = {
+    enable = true;
+    font = "JetBrainsMono Nerd Font 12";
+
+    extraConfig = {
+      modi = "drun,window";
+      show-icons = true;
+      sort = true;
+    };
+  };
+
+
 
   programs.cava = {
     enable = true;
   };
 
+
   imports = [
   ./stylix.nix
   ./kitty.nix
   ./gtk.nix
-  ./fish.nix
+   ./shell.nix
+   ./nvf.nix
 ];
-
-
-
-
-
+  
 }

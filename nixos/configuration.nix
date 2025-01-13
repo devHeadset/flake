@@ -1,30 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Mullvad VPN
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-  
+  virtualisation.docker.enable = true;
+
 
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -57,22 +56,31 @@
     variant = "";
   };
 
-   programs.steam = {
+  programs.steam = {
     enable = true;
     package = pkgs.steam.override {
-      extraLibraries = p: with p; [
-        (lib.getLib networkmanager)
-      ];
+      extraLibraries = p:
+        with p; [
+          (lib.getLib networkmanager)
+        ];
     };
   };
 
 
 
- # Define a user account. Don't forget to set a password with ‘passwd’.
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    settings = {
+      General.DisplayServer = "wayland";
+    };
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.headset = {
     isNormalUser = true;
     description = "headset";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
   };
 
@@ -82,24 +90,25 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  home-manager
-   git
-   hyprpanel
-   mpd
-   ncmpcpp
-   ghostty
-   idevicerestore
-   mpd-mpris
+    home-manager
+    git
+    hyprpanel
+    mpd
+    ncmpcpp
+    ghostty
+    idevicerestore
+    mpd-mpris
   ];
 
-	# Hyprland
-	programs.hyprland.enable = true;
+  # Hyprland
+  programs.hyprland.enable = true;
 
-  services.mpd.enable = true; 
+  # Mpd (I don't use Nix configuration for this)
+  services.mpd.enable = true;
 
 
-programs.fish.enable = true;
-users.users.headset.shell = pkgs.fish;
+  programs.zsh.enable = true;
+  users.users.headset.shell = pkgs.zsh;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -128,6 +137,5 @@ users.users.headset.shell = pkgs.fish;
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-
-nix.settings.experimental-features = ["nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 }
