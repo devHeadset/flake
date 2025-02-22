@@ -15,7 +15,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nxs"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   virtualisation.docker.enable = true;
@@ -68,19 +68,12 @@
 
 
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm = {
-    enable = true;
-    settings = {
-      General.DisplayServer = "wayland";
-    };
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.headset = {
     isNormalUser = true;
     description = "headset";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "libvirtd"];
     packages = with pkgs; [];
   };
 
@@ -95,16 +88,36 @@
     hyprpanel
     mpd
     ncmpcpp
-    ghostty
     idevicerestore
     mpd-mpris
+    virt-manager
+    virt-viewer
+    spice spice-gtk
+    spice-protocol
+    win-virtio
+    win-spice
   ];
 
   # Hyprland
   programs.hyprland.enable = true;
 
-  # Mpd (I don't use Nix configuration for this)
-  services.mpd.enable = true;
+
+
+
+  programs.dconf.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  services.spice-vdagentd.enable = true;
+
 
 
   programs.zsh.enable = true;

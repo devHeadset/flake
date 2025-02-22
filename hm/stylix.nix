@@ -21,6 +21,14 @@
     };
   };
 
+  stylix.opacity = {
+    applications = 0.9;
+#    terminal = 0.6;
+    desktop = 1.0;
+    popups = 1.0;
+  };
+
+
 
   stylix.targets.kitty.enable = true;
   stylix.targets.waybar.enable = true;

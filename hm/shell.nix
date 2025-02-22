@@ -8,14 +8,18 @@ programs.zsh = {
 
 
   shellAliases = {
-    ll = "ls -l";
+    ll = "lsd -l";
     update = "sudo nixos-rebuild switch --flake ~/flake/#myNixos";
     ssh = "kitty +kitten ssh";
+    ls = "lsd";
+    nix-shell = "nix-shell --command zsh ";
+    mv = "mv -v ";
+    rm = "rm -v ";
     };
 
     oh-my-zsh = {
     enable = true;
-    plugins = [ "git" ];
+    plugins = [ "git" ]; 
     theme = "alanpeabody";
     };
 };

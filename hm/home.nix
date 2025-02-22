@@ -20,22 +20,17 @@ catppuccin.btop.enable = true;
 
 
 
-  programs.nixcord = {
-    enable = true;  
-    config = {
-      useQuickCss = true;   
-      themeLinks = [        
-        "https://raw.githubusercontent.com/catppuccin/discord/refs/heads/main/themes/mocha.theme.css"
-      ];
-      frameless = true; 
-      plugins = {
-        messageLogger.enable = true;
-        hideAttachments.enable = true;    
-        silentTyping.enable = true;
-        fakeNitro.enable = true;
-      };
-    };
-  };
+services.mpd = {
+enable = true;
+musicDirectory = "~/tunes";
+  extraConfig = '' audio_output {
+    type "pipewire"
+    name "My PipeWire Output"
+ }
+
+  '';
+};
+
 
 
 home.packages = [
@@ -56,6 +51,10 @@ home.packages = [
     pkgs.flatpak
     pkgs.gimp
     pkgs.neofetch
+    pkgs.lsd
+    pkgs.emacs30
+    pkgs.sxiv
+    pkgs.vinegar
 ];
 
 programs.obs-studio = {
@@ -63,7 +62,9 @@ programs.obs-studio = {
 };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "emacsclient -c ";
+    BROWSER = "firefox";
+     XDG_DATA_DIRS="/home/headset/.nix-profile/share:/nix/profile/share:/home/headset/.local/state/nix/profile/share:/etc/profiles/per-user/headset/share:/nix/var/nix/profiles/default/share:/run/current-system/sw/share:/home/headset/.local/share/flatpak/exports/share/:/var/lib/flatpak/exports/share/:/usr/local/share/:/usr/share/:";
   };
 
 
@@ -103,7 +104,7 @@ programs.obs-studio = {
   ./kitty.nix
   ./gtk.nix
    ./shell.nix
-   ./nvf.nix
+    ./nixcord.nix
 ];
   
 }

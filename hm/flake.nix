@@ -5,7 +5,8 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
-    ghostty.url = "github:clo4/ghostty-hm-module";
+    stylix.url = "github:danth/stylix";
+    
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,7 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix";
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -28,14 +28,10 @@
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+};
 
-     nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  outputs = { nixpkgs, home-manager, catppuccin, stylix, spicetify-nix, nixcord, nvf, ... }:
+  outputs = { nixpkgs, home-manager, catppuccin, stylix, spicetify-nix, nixcord, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -51,7 +47,6 @@
     catppuccin.homeManagerModules.catppuccin
     spicetify-nix.homeManagerModules.default
     nixcord.homeManagerModules.nixcord
-    nvf.homeManagerModules.default 
  ];
 
 
