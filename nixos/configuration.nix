@@ -50,6 +50,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+
+services.wivrn = {
+  enable = true;
+  openFirewall = true;
+};
+
+
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -96,6 +104,10 @@
     spice-protocol
     win-virtio
     win-spice
+    glslang
+    libdrm
+    libnotify
+    openssl
   ];
 
   # Hyprland
@@ -118,6 +130,17 @@
   };
   services.spice-vdagentd.enable = true;
 
+services.printing.enable = true;
+
+services.avahi = {
+  enable = true;
+  nssmdns = true;
+  openFirewall = true;
+  publish = {
+    enable = true;
+    userServices = true;
+  };
+};
 
 
   programs.zsh.enable = true;

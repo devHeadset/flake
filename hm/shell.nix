@@ -15,6 +15,7 @@ programs.zsh = {
     nix-shell = "nix-shell --command zsh ";
     mv = "mv -v ";
     rm = "rm -v ";
+    hms = "home-manager switch ";
     };
 
     oh-my-zsh = {

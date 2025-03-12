@@ -6,23 +6,14 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin.url = "github:catppuccin/nix";
     stylix.url = "github:danth/stylix";
-    
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
-
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nixcord = {
       url = "github:kaylorben/nixcord";
@@ -31,7 +22,7 @@
     
 };
 
-  outputs = { nixpkgs, home-manager, catppuccin, stylix, spicetify-nix, nixcord, ... }:
+  outputs = { nixpkgs, home-manager, catppuccin, stylix, nixcord, zen-browser, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -45,8 +36,8 @@
     ./home.nix
     stylix.homeManagerModules.stylix
     catppuccin.homeManagerModules.catppuccin
-    spicetify-nix.homeManagerModules.default
     nixcord.homeManagerModules.nixcord
+    { home.packages = [ zen-browser.packages."${system}".default ]; }
  ];
 
 

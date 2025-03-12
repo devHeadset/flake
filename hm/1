@@ -55,13 +55,9 @@ home.packages = [
     pkgs.emacs30
     pkgs.sxiv
     pkgs.vinegar
-    pkgs.keepassxc
-    pkgs.fastfetch
-    pkgs.superTuxKart
-    pkgs.xonotic
-    pkgs.protontricks
+    pkgs.zen-browser
+    inputs.zen-browser.packages."${system}".default
 ];
-
 
 programs.obs-studio = {
   enable = true;
@@ -69,7 +65,7 @@ programs.obs-studio = {
 
   home.sessionVariables = {
     EDITOR = "emacsclient -c ";
-    BROWSER = "zen";
+    BROWSER = "firefox";
      XDG_DATA_DIRS="/home/headset/.nix-profile/share:/nix/profile/share:/home/headset/.local/state/nix/profile/share:/etc/profiles/per-user/headset/share:/nix/var/nix/profiles/default/share:/run/current-system/sw/share:/home/headset/.local/share/flatpak/exports/share/:/var/lib/flatpak/exports/share/:/usr/local/share/:/usr/share/:";
   };
 
@@ -111,7 +107,6 @@ programs.obs-studio = {
   ./gtk.nix
    ./shell.nix
     ./nixcord.nix
-  
 ];
   
 }
