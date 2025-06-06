@@ -32,14 +32,10 @@ musicDirectory = "~/tunes";
 };
 
 
-
 home.packages = [
     pkgs.tmux
-    pkgs.firefox
-    pkgs.eza
-    pkgs.starship 
+    pkgs.playerctl
     pkgs.wl-clipboard
-    pkgs.kitty
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.btop
     pkgs.nwg-displays
@@ -57,11 +53,32 @@ home.packages = [
     pkgs.vinegar
     pkgs.keepassxc
     pkgs.fastfetch
-    pkgs.superTuxKart
-    pkgs.xonotic
     pkgs.protontricks
+    pkgs.bottles
+    pkgs.winetricks
+    pkgs.wine
+    pkgs.mpv
+    pkgs.python311
+    pkgs.unityhub
+    pkgs.waybar
+    pkgs.cmake
+    pkgs.gnumake
+    pkgs.vesktop
 ];
 
+ xdg.mimeApps.enable = true;
+
+  xdg.mimeApps.defaultApplications = {
+    "x-scheme-handler/unityhub" = "unityhub.desktop";
+  };
+xdg.desktopEntries.unityhub = {
+  name = "Unity Hub";
+  exec = "${pkgs.unityhub}/bin/unityhub %u"; # adjust as needed
+  icon = "unityhub";
+  terminal = false;
+  type = "Application";
+  mimeType = [ "x-scheme-handler/unityhub" ];
+};
 
 programs.obs-studio = {
   enable = true;
@@ -107,10 +124,9 @@ programs.obs-studio = {
 
   imports = [
   ./stylix.nix
-  ./kitty.nix
+  ./terminals.nix
   ./gtk.nix
    ./shell.nix
-    ./nixcord.nix
   
 ];
   
