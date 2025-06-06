@@ -127,7 +127,6 @@ programs.obs-studio = {
   ./terminals.nix
   ./gtk.nix
    ./shell.nix
-  
+   ./waybar.nix
 ];
-  
 }
