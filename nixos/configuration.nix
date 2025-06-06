@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -10,34 +7,15 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
   networking.hostName = "nxs"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   virtualisation.docker.enable = true;
-
-
-  # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -50,15 +28,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-
-services.wivrn = {
-  enable = true;
-  openFirewall = true;
-};
-
-
-
-  # Configure keymap in X11
+ programs.nix-ld.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -75,9 +45,16 @@ services.wivrn = {
   };
 
 
+  hardware.pulseaudio.enable = false;  # optional if using pipewire
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+
   users.users.headset = {
     isNormalUser = true;
     description = "headset";
@@ -85,15 +62,11 @@ services.wivrn = {
     packages = with pkgs; [];
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
     git
-    hyprpanel
     mpd
     ncmpcpp
     idevicerestore
@@ -108,6 +81,7 @@ services.wivrn = {
     libdrm
     libnotify
     openssl
+    eww
   ];
 
   # Hyprland
@@ -117,6 +91,7 @@ services.wivrn = {
 
 
   programs.dconf.enable = true;
+# Virt
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -128,42 +103,21 @@ services.wivrn = {
     };
     spiceUSBRedirection.enable = true;
   };
-  services.spice-vdagentd.enable = true;
 
+
+services.spice-vdagentd.enable = true;
 services.printing.enable = true;
 
-services.avahi = {
-  enable = true;
-  nssmdns = true;
-  openFirewall = true;
-  publish = {
-    enable = true;
-    userServices = true;
-  };
+ hardware.opentabletdriver = {
+ 	enable = true;
+	daemon.enable = true;
 };
+programs.zsh.enable = true;
+users.users.headset.shell = pkgs.zsh;
 
-
-  programs.zsh.enable = true;
-  users.users.headset.shell = pkgs.zsh;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
