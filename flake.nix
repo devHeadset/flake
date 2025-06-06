@@ -2,11 +2,10 @@
   description = "headset's sys flake :3";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
  };
 
   # outputs section to define configurations and outputs for the flake
-  outputs = { self, nixpkgs, hyprpanel, ... }: let
+  outputs = { self, nixpkgs, ... }: let
     # define the target system architecture
     system = "x86_64-linux";
 
@@ -26,7 +25,6 @@
         # define nixos modules to be included
         modules = [
           ./nixos/configuration.nix
-          { nixpkgs.overlays = [ hyprpanel.overlay ]; }
         ];
       };
     };
