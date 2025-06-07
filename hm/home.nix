@@ -33,7 +33,6 @@ musicDirectory = "~/tunes";
 
 
 home.packages = [
-    pkgs.tmux
     pkgs.playerctl
     pkgs.wl-clipboard
     pkgs.nerd-fonts.jetbrains-mono
@@ -45,7 +44,6 @@ home.packages = [
     pkgs.hyprshot
     pkgs.xfce.thunar
     pkgs.flatpak
-    pkgs.gimp
     pkgs.neofetch
     pkgs.lsd
     pkgs.emacs30
@@ -128,5 +126,6 @@ programs.obs-studio = {
   ./gtk.nix
    ./shell.nix
    ./waybar.nix
+    ./fastfetch.nix
 ];
 }
