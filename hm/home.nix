@@ -18,6 +18,14 @@ catppuccin.cursors = {
 
 catppuccin.btop.enable = true;
 
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs30-pgtk;
+  };
+
+
+
+
 
 
 services.mpd = {
@@ -46,7 +54,6 @@ home.packages = [
     pkgs.flatpak
     pkgs.neofetch
     pkgs.lsd
-    pkgs.emacs30
     pkgs.sxiv
     pkgs.vinegar
     pkgs.keepassxc
