@@ -53,6 +53,8 @@
     pulse.enable = true;
   };
 
+  services.cron.enable = true;
+
 
 
   users.users.headset = {
