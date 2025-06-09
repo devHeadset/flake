@@ -8,7 +8,7 @@
         height = 35;
         modules-left = [ "cpu" "memory" ];
         modules-center = ["hyprland/workspaces"];
-        modules-right = [ "clock" "battery" ];
+        modules-right = [ "clock" "battery" "tray" ];
         
         cpu = {
           format = "󰍛 {usage}%";
