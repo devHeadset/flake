@@ -69,6 +69,7 @@ home.packages = [
     pkgs.cmake
     pkgs.gnumake
     pkgs.vesktop
+    pkgs.qbittorrent
 ];
 
  xdg.mimeApps.enable = true;

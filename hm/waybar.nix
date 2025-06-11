@@ -4,8 +4,8 @@
     settings = {
       mainBar = {
         layer = "top";
-        position = "bottom";
-        height = 35;
+        position = "top";
+        height = 25;
         modules-left = [ "cpu" "memory" ];
         modules-center = ["hyprland/workspaces"];
         modules-right = [ "clock" "battery" "tray" ];
@@ -14,7 +14,7 @@
           format = "󰍛 {usage}%";
           tooltip = false;
         };
-        
+ 
         memory = {
           format = "󰘚 {used}GB";
           tooltip = false;

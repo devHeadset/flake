@@ -10,7 +10,6 @@ programs.zsh = {
   shellAliases = {
     ll = "lsd -l";
     update = "sudo nixos-rebuild switch --flake ~/docs/flake/#myNixos";
-    ssh = "kitty +kitten ssh";
     ls = "lsd";
     nix-shell = "nix-shell --command zsh ";
     mv = "mv -v ";

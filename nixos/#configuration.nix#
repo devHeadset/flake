@@ -89,6 +89,7 @@ services.mullvad-vpn.package = pkgs.mullvad-vpn;
     libnotify
     openssl
     eww
+
   ];
 
   # Hyprland
